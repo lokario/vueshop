@@ -11,10 +11,25 @@
         />
 
         <div class="text-h5 text-center mb-8 font-weight-medium">
-          Sign in to your account
+          Sign up your account
         </div>
 
         <v-sheet rounded="lg" border="opacity-25 sm">
+        <v-text-field
+            v-model="name"
+            hide-details="auto"
+            placeholder="Name"
+            prepend-inner-icon="mdi-account-outline"
+            density="compact"
+            variant="solo"
+            rounded="lg"
+            flat
+            :error="!!nameError"
+            @blur="validateName"
+          />
+
+          <v-divider />
+
           <v-text-field
             v-model="email"
             hide-details="auto"
@@ -48,16 +63,16 @@
         </v-sheet>
 
         <div v-if="emailError || passwordError" class="text-body-2 mt-4 text-red-darken-4">
-          {{ emailError || passwordError }}
+          {{ nameError || emailError || passwordError }}
         </div>
 
         <GradientButton class="my-8" :disabled="!isValid">
-          Sign In
+          Sign Up
         </GradientButton>
 
         <p class="text-center">
-          Don't have an account?
-           <router-link to="/signup" class="text-accent font-weight-medium">Sign up</router-link>
+          Already have an account?
+          <router-link to="/signin" class="text-accent font-weight-medium">Sign in</router-link>
         </p>
       </v-form>
     </v-card>
@@ -69,17 +84,27 @@ import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 
 // Reactive variables
+const name = ref("");
 const email = ref("");
 const password = ref("");
 const visible = ref(false);
 const isValid = ref(false);
 
 // Validation errors
+const nameError = ref("");
 const emailError = ref("");
 const passwordError = ref("");
 
 // Stores
 const authStore = useAuthStore();
+
+const validateName = () => {
+  if (!name.value) {
+    nameError.value = "Name is required";
+  } else {
+    nameError.value = "";
+  }
+};
 
 const validateEmail = () => {
   if (!email.value) {
@@ -100,10 +125,11 @@ const validatePassword = () => {
 };
 
 const formIsValid = computed(() => {
-  return !!email.value && !!password.value && !emailError.value && !passwordError.value;
+  return !!name.value && !!email.value && !!password.value && !emailError.value && !passwordError.value;
 });
 
 const submitForm = async () => {
+  validateName();
   validateEmail();
   validatePassword();
 
@@ -112,10 +138,10 @@ const submitForm = async () => {
     return;
   }
 
-  await authStore.login(email.value, password.value);
+  await authStore.signUp(name.value, email.value, password.value);
 
   if (authStore.apiError) {
-    console.error("Login failed:", authStore.apiError);
+    console.error("SignUp failed:", authStore.apiError);
   }
 };
 </script>

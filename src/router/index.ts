@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router/auto";
 import { setupLayouts } from "virtual:generated-layouts";
-import SigninPage from "@/pages/SigninPage.vue";
+import SignInPage from "@/pages/SignInPage.vue";
+import SignUpPage from "@/pages/SignUpPage.vue";
 
-const routes = [{ path: "/signin", name: "Signin", component: SigninPage }];
+const routes = [
+  { path: "/signin", name: "SignIn", component: SignInPage },
+  { path: "/signup", name: "SignUp", component: SignUpPage },
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

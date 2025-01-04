@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import { loginUser } from "@/services/authService";
+import { loginUser, signUpUser } from "@/services/authService";
 import { useRouter } from "vue-router";
 import { handleApiError } from "@/services/errorHandler";
 import { ref, computed } from "vue";
@@ -23,15 +23,29 @@ export const useAuthStore = defineStore("auth", () => {
     try {
       const { data } = await loginUser(email, password);
 
-      // Token and user instantiation
-      token.value = data.token;
-      rawUser.value = new User(data.user);
-
-      // Redirect after login
-      router.push("/index");
+      saveDataAndRedirect(data);
     } catch (error: unknown) {
       apiError.value = handleApiError(error);
     }
+  };
+
+  const signUp = async (name: string, email: string, password: string) => {
+    try {
+      const { data } = await signUpUser(name, email, password, password);
+
+      saveDataAndRedirect(data);
+    } catch (error: unknown) {
+      apiError.value = handleApiError(error);
+    }
+  };
+
+  const saveDataAndRedirect = (data) => {
+    // Token and user instantiation
+    token.value = data.token;
+    rawUser.value = new User(data.user);
+
+    // Redirect after login
+    router.push("/");
   };
 
   return {
@@ -40,5 +54,6 @@ export const useAuthStore = defineStore("auth", () => {
     apiError,
     isAuthenticated,
     login,
+    signUp,
   };
 });
