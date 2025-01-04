@@ -1,7 +1,7 @@
 <template>
   <v-sheet class="background w-100 h-screen d-flex align-center justify-center">
     <v-card class="pa-8 ma-4 custom-shadow" width="420" min-width="180" rounded="lg" flat>
-      <v-form v-model="isValid">
+      <v-form v-model="isValid" @submit="submitForm" @submit.prevent>
         <v-img
           :width="60"
           aspect-ratio="1/1"
@@ -66,6 +66,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuthStore } from "@/stores/authStore";
 
 // Reactive variables
 const email = ref("");
@@ -76,6 +77,10 @@ const isValid = ref(false);
 // Validation errors
 const emailError = ref("");
 const passwordError = ref("");
+const apiError = ref("");
+
+// Stores
+const authStore = useAuthStore();
 
 const validateEmail = () => {
   if (!email.value) {
@@ -95,15 +100,23 @@ const validatePassword = () => {
   }
 };
 
-const submitForm = () => {
+const formIsValid = computed(() => {
+  return !!email.value && !!password.value && !emailError.value && !passwordError.value;
+});
+
+const submitForm = async () => {
   validateEmail();
   validatePassword();
 
-  if (!emailError.value && !passwordError.value) {
-    isValid.value = true;
-    console.log("Form Submitted", { email: email.value, password: password.value });
-  } else {
-    isValid.value = false;
+  if (!formIsValid.value) {
+    console.error("Validation failed");
+    return;
+  }
+
+  await authStore.login(email.value, password.value);
+
+  if (authStore.apiError) {
+    console.error("Login failed:", authStore.apiError);
   }
 };
 </script>
