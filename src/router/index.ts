@@ -2,8 +2,10 @@ import { createRouter, createWebHistory } from "vue-router/auto";
 import { setupLayouts } from "virtual:generated-layouts";
 import SignInPage from "@/pages/SignInPage.vue";
 import SignUpPage from "@/pages/SignUpPage.vue";
+import HomePage from "@/pages/HomePage.vue";
 
 const routes = [
+  { path: "/", name: "Index", component: HomePage },
   { path: "/signin", name: "SignIn", component: SignInPage },
   { path: "/signup", name: "SignUp", component: SignUpPage },
 ];
