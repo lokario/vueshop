@@ -29,9 +29,14 @@
 </template>
 
 <script lang="ts" setup>
+import { useCategoriesStore } from "@/stores/categoriesStore";
 import { useProductsStore } from "@/stores/productsStore";
 
 const productsStore = useProductsStore();
+const categoriesStore = useCategoriesStore();
 
-const onSearch = async () => await productsStore.searchProducts();
+const onSearch = async () => {
+  categoriesStore.selectedCategory = "";
+  await productsStore.searchProducts();
+}
 </script>

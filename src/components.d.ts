@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: (typeof import("./components/AppFooter.vue"))["default"]
+    CategoryItem: typeof import('./components/CategoryItem.vue')['default']
     GradientButton: typeof import('./components/GradientButton.vue')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     NavDrawer: typeof import('./components/NavDrawer.vue')['default']

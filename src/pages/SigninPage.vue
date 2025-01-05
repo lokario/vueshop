@@ -120,7 +120,7 @@ const submitForm = async () => {
 };
 </script>
 
-<style>
+<style scoped>
 .background {
   background: center /cover url("@/assets/pattern2.svg") !important;
 }

@@ -5,6 +5,7 @@ import {
   searchProductsByName,
 } from "@/services/productsService";
 import { handleApiError } from "@/services/errorHandler";
+import { useCategoriesStore } from "./categoriesStore";
 
 export const useProductsStore = defineStore("products", () => {
   // State
@@ -15,6 +16,8 @@ export const useProductsStore = defineStore("products", () => {
   const isFetchingMore = ref(false);
   const apiError = ref<string>("");
   const searchQuery = ref<string>("");
+
+  const categoriesStore = useCategoriesStore();
 
   // Actions
   const loadProducts = async (page = 1) => {
@@ -31,7 +34,10 @@ export const useProductsStore = defineStore("products", () => {
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     try {
-      const { data, meta } = await fetchProducts(page);
+      const { data, meta } = await fetchProducts(
+        page,
+        categoriesStore.selectedCategory
+      );
       const newProducts = mapProducts(data);
 
       if (page === 1) {

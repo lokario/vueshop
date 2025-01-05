@@ -32,3 +32,12 @@ export type ProductData = Partial<
 export const mapProducts = (data: ProductData[]): Product[] => {
   return data.map((item) => new Product(item));
 };
+
+export const filterProductsByCategories = (
+  products: Product[],
+  categories: string[]
+): Product[] => {
+  return products.filter((product) =>
+    product.categories.some((category) => categories.includes(category))
+  );
+};
