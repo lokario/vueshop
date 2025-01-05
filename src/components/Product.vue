@@ -15,12 +15,12 @@
         half-increments
         readonly
       />
-      ({{ product.punctuation }})
+      ({{ product.punctuation ?? 0}})
     </div>
     <div class="mt-3 d-flex align-center justify-space-between">
       <div class="d-flex flex-column">
         <span class="text-caption text-grey">Price</span>
-        <div class="product-price">$ {{ product.price }}</div>
+        <div class="product-price">${{ product.price }}</div>
       </div>
       <!-- <v-btn color="accent" variant="flat"  size="small" icon="mdi-cart-outline" /> -->
       <v-btn color="accent" variant="outlined" size="small">Add to cart</v-btn>
