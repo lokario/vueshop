@@ -8,6 +8,8 @@ export default class User {
   phone?: string | null;
   status?: number;
   roleId: number;
+  rating?: number;
+  punctuation?: number;
 
   constructor(data: Partial<User>) {
     this.id = data.id!;

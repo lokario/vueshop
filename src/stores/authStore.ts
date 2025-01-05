@@ -8,13 +8,12 @@ import User from "@/models/User";
 
 export const useAuthStore = defineStore("auth", () => {
   // State
+  const apiError = ref<string>("");
   const token = useLocalStorage<string | null>("authToken", null);
   const rawUser = useLocalStorage<Partial<User> | null>("user", null);
-  const user = computed(() => (rawUser.value ? new User(rawUser.value) : null));
-
-  const apiError = ref<string>("");
 
   // Getters
+  const user = computed(() => (rawUser.value ? new User(rawUser.value) : null));
   const isAuthenticated = computed(() => !!token.value);
 
   // Actions
