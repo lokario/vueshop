@@ -18,20 +18,30 @@
 
     <v-list>
       <CartItem
+        v-if="cartStore.cartItems.length"
         v-for="item in cartStore.cartItems"
         :key="item.product.id"
         :cart-item="item"
         class="ma-5"
       />
+      <v-list-item v-else>
+        <v-list-item-title class="text-center"
+          >Your cart is empty.</v-list-item-title
+        >
+      </v-list-item>
     </v-list>
 
     <template #append>
       <v-sheet class="pa-4" color="grey-lighten-4">
         <div class="d-flex align-center justify-space-between">
           <div class="text-subtitle-2 font-weight-medium">Total price:</div>
-          <div class="text-subtitle-1 font-weight-medium">${{ cartStore.totalPrice }}</div>
+          <div class="text-subtitle-1 font-weight-medium">
+            ${{ cartStore.totalPrice }}
+          </div>
         </div>
-        <GradientButton class="mt-4" rounded="lg" density="comfortable">Checkout</GradientButton>
+        <GradientButton class="mt-4" rounded="lg" density="comfortable"
+          >Checkout</GradientButton
+        >
       </v-sheet>
     </template>
   </v-navigation-drawer>
