@@ -4,6 +4,7 @@
       width="220"
       height="220"
       :src="product.image ?? 'https://api.takeit.ciph3r.co/img/placepic.jpg'"
+      rounded
     />
     <div class="product-title mt-4 mb-1 text-no-wrap text-truncate">{{ product.name }}</div>
     <div class="d-flex align-center text-body-2">
