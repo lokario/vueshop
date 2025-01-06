@@ -19,6 +19,16 @@
       </v-list-item>
 
       <!-- First 5 Categories -->
+      <div
+        v-if="productsStore.isLoading"
+      >
+        <v-skeleton-loader
+          v-for="n in 5"
+          :key="n"
+          type="list-item"
+        />
+      </div>
+
       <div class="categories-list">
         <CategoryItem
           v-for="category in limitedCategories"
