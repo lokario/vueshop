@@ -3,6 +3,7 @@
     v-model="cartStore.isCartOpen"
     location="right"
     temporary
+    width="320"
   >
     <template #prepend>
       <v-list-item
