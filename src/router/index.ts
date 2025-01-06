@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router/auto";
 import { setupLayouts } from "virtual:generated-layouts";
-import SignInPage from "@/pages/SignInPage.vue";
+import SignInPage from "@/pages/LoginPage.vue";
 import SignUpPage from "@/pages/SignUpPage.vue";
 import HomePage from "@/pages/HomePage.vue";
 import { useAuthStore } from "@/stores/authStore";
