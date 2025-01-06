@@ -31,7 +31,9 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next({ path: "/signin" });
+    next({ path: "/signin" }); // Go login
+  } else if (authStore.isAuthenticated && !to.meta.requiresAuth) {
+    next({ path: "/" }); // Go home
   } else {
     next(); // Allow navigation
   }
