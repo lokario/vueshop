@@ -23,15 +23,17 @@
         <div class="product-price">${{ product.price }}</div>
       </div>
       <!-- <v-btn color="accent" variant="flat"  size="small" icon="mdi-cart-outline" /> -->
-      <v-btn color="accent" variant="outlined" size="small">Add to cart</v-btn>
+      <v-btn color="accent" variant="outlined" size="small" @click="cartStore.addToCart(product)">Add to cart</v-btn>
     </div>
   </v-sheet>
 </template>
 
 <script lang="ts" setup>
 import Product from '@/models/Product';
+import { useCartStore } from '@/stores/cartStore';
 
-const props = defineProps <{ product: Product } > ();
+const props = defineProps<{ product: Product }>();
+const cartStore = useCartStore();
 
 </script>
 

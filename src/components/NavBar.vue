@@ -18,13 +18,31 @@
         placeholder="Search for products"
       />
 
-      <v-btn class="ms-5" icon="mdi-cart-outline" />
+      <v-btn
+        class="text-none"
+        stacked
+        rounded="circle"
+        size="large"
+        @click.stop="cartStore.isCartOpen = !cartStore.isCartOpen"
+      >
+        <v-badge
+          v-if="cartStore.totalItems > 0"
+          color="error"
+          :content="cartStore.totalItems"
+        >
+          <v-icon>mdi-cart-outline</v-icon>
+        </v-badge>
+        <v-icon v-else>mdi-cart-outline</v-icon>
+      </v-btn>
     </div>
 
     <!-- Mobile Layout -->
     <div class="w-100 d-flex d-sm-none flex-column">
       <div class="w-100 mb-3 d-flex justify-space-between">
-        <v-app-bar-nav-icon variant="text" @click.stop="productsStore.isDrawerOpen = !productsStore.isDrawerOpen"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon
+          variant="text"
+          @click.stop="productsStore.isDrawerOpen = !productsStore.isDrawerOpen"
+        />
         <v-img max-width="140" src="@/assets/logo-full.png" />
 
         <v-btn class="ms-5" icon="mdi-cart-outline" />
@@ -40,12 +58,14 @@
 </template>
 
 <script lang="ts" setup>
+import { useCartStore } from "@/stores/cartStore";
 import { useCategoriesStore } from "@/stores/categoriesStore";
 import { useProductsStore } from "@/stores/productsStore";
 import { useDisplay } from "vuetify";
 
 const productsStore = useProductsStore();
 const categoriesStore = useCategoriesStore();
+const cartStore = useCartStore();
 const display = useDisplay();
 
 const onSearch = async () => {

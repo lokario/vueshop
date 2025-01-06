@@ -75,7 +75,7 @@ const remainingCategories = computed(() => categoriesStore.categories.slice(5));
 
 onMounted(() => {
   categoriesStore.loadCategories();
-  productsStore.isDrawerOpen = display.smAndUp.value;
+  productsStore.isDrawerOpen = display.smAndUp.value; // Make sure this is true for desktop views
 });
 
 const selectCategory = async (categoryId: string) => {

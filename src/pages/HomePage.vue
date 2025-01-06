@@ -1,6 +1,8 @@
 <template>
   <NavBar class="position-fixed" />
   <NavDrawer class="position-fixed" />
+  <ShoppingCart class="position-fixed" />
+
   <div
     v-if="productsStore.isLoading"
     class="d-flex flex-wrap justify-center ga-8 pa-8"
@@ -42,6 +44,7 @@
 <script setup lang="ts">
 import { useInfiniteScroll } from "@vueuse/core";
 import { useProductsStore } from "@/stores/productsStore";
+import ShoppingCart from "@/components/ShoppingCart.vue";
 
 const productsStore = useProductsStore();
 const loadTrigger = ref<HTMLElement | null>(null);
