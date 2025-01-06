@@ -3,9 +3,15 @@ import { setupLayouts } from "virtual:generated-layouts";
 import SignInPage from "@/pages/SignInPage.vue";
 import SignUpPage from "@/pages/SignUpPage.vue";
 import HomePage from "@/pages/HomePage.vue";
+import { useAuthStore } from "@/stores/authStore";
 
 const routes = [
-  { path: "/", name: "Index", component: HomePage },
+  {
+    path: "/",
+    name: "Index",
+    component: HomePage,
+    meta: { requiresAuth: true },
+  },
   { path: "/signin", name: "SignIn", component: SignInPage },
   { path: "/signup", name: "SignUp", component: SignUpPage },
 ];
@@ -13,6 +19,16 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: setupLayouts(routes),
+});
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next({ path: "/signin" });
+  } else {
+    next(); // Allow navigation
+  }
 });
 
 // Workaround for https://github.com/vitejs/vite/issues/11804
