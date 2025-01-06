@@ -4,6 +4,7 @@ import SignInPage from "@/pages/SignInPage.vue";
 import SignUpPage from "@/pages/SignUpPage.vue";
 import HomePage from "@/pages/HomePage.vue";
 import { useAuthStore } from "@/stores/authStore";
+import NotFound from "@/pages/NotFound.vue";
 
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
   },
   { path: "/signin", name: "SignIn", component: SignInPage },
   { path: "/signup", name: "SignUp", component: SignUpPage },
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
