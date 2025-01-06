@@ -10,7 +10,7 @@ export const useAuthStore = defineStore("auth", () => {
   // State
   const apiError = ref<string>("");
   const token = useLocalStorage<string | null>("authToken", null);
-  const rawUser = useLocalStorage<Partial<User> | null>("user", null);
+  const rawUser = useLocalStorage<Partial<User>>("user", {} as Partial<User>);
 
   // Getters
   const user = computed(() => (rawUser.value ? new User(rawUser.value) : null));
