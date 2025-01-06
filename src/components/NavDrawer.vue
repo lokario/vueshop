@@ -1,5 +1,9 @@
 <template>
-  <v-navigation-drawer :mobile="true" v-model="productsStore.isDrawerOpen" temporary :permanent="display.smAndUp.value">
+  <v-navigation-drawer
+    v-model="productsStore.isDrawerOpen"
+    temporary
+    :permanent="display.smAndUp.value"
+  >
     <v-list>
       <v-list-item
         prepend-icon="mdi-filter-variant"
@@ -71,6 +75,7 @@ const remainingCategories = computed(() => categoriesStore.categories.slice(5));
 
 onMounted(() => {
   categoriesStore.loadCategories();
+  productsStore.isDrawerOpen = display.smAndUp.value;
 });
 
 const selectCategory = async (categoryId: string) => {
