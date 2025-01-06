@@ -20,7 +20,7 @@
 
       <!-- First 5 Categories -->
       <div
-        v-if="productsStore.isLoading"
+        v-if="categoriesStore.isLoading"
       >
         <v-skeleton-loader
           v-for="n in 5"
