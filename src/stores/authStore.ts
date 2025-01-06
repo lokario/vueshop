@@ -38,6 +38,11 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const logout = () => {
+    token.value = null;
+    router.push("/signin");
+  };
+
   const saveDataAndRedirect = (data) => {
     // Token and user instantiation
     token.value = data.token;
@@ -54,5 +59,6 @@ export const useAuthStore = defineStore("auth", () => {
     isAuthenticated,
     login,
     signUp,
+    logout,
   };
 });

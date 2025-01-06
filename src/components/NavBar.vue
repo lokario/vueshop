@@ -34,6 +34,8 @@
         </v-badge>
         <v-icon v-else>mdi-cart-outline</v-icon>
       </v-btn>
+
+      <AccountMenu/>
     </div>
 
     <!-- Mobile Layout -->
