@@ -19,5 +19,3 @@ const props = defineProps<{
   selected: boolean;
 }>();
 </script>
-
-

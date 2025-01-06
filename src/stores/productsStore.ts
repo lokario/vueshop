@@ -16,6 +16,7 @@ export const useProductsStore = defineStore("products", () => {
   const isFetchingMore = ref(false);
   const apiError = ref<string>("");
   const searchQuery = ref<string>("");
+  const isDrawerOpen = ref(false);
 
   const categoriesStore = useCategoriesStore();
 
@@ -84,6 +85,7 @@ export const useProductsStore = defineStore("products", () => {
     isFetchingMore,
     apiError,
     searchQuery,
+    isDrawerOpen,
     loadProducts,
     searchProducts,
   };

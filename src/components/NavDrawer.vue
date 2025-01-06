@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent>
+  <v-navigation-drawer :mobile="true" v-model="productsStore.isDrawerOpen" temporary :permanent="display.smAndUp.value">
     <v-list>
       <v-list-item
         prepend-icon="mdi-filter-variant"
@@ -55,7 +55,9 @@
 import { useCategoriesStore } from "@/stores/categoriesStore";
 import CategoryItem from "./CategoryItem.vue";
 import { useProductsStore } from "@/stores/productsStore";
+import { useDisplay } from "vuetify";
 
+const display = useDisplay();
 const productsStore = useProductsStore();
 const categoriesStore = useCategoriesStore();
 const showAllCategories = ref(false);
