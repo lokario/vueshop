@@ -32,7 +32,7 @@
     </v-list>
 
     <template #append>
-      <v-sheet class="pa-4" color="grey-lighten-4">
+      <v-sheet class="pa-4 border-t-sm">
         <div class="d-flex align-center justify-space-between">
           <div class="text-subtitle-2 font-weight-medium">Total price:</div>
           <div class="text-subtitle-1 font-weight-medium">
