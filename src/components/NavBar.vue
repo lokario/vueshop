@@ -38,14 +38,30 @@
 
     <!-- Mobile Layout -->
     <div class="w-100 d-flex d-sm-none flex-column">
-      <div class="w-100 mb-3 d-flex justify-space-between">
+      <div class="w-100 mb-3 d-flex align-center justify-space-between">
         <v-app-bar-nav-icon
           variant="text"
           @click.stop="productsStore.isDrawerOpen = !productsStore.isDrawerOpen"
         />
         <v-img max-width="140" src="@/assets/logo-full.png" />
 
-        <v-btn class="ms-5" icon="mdi-cart-outline" />
+        <v-btn
+          class="text-none"
+          stacked
+          rounded="circle"
+          density="compact"
+          size="small"
+          @click.stop="cartStore.isCartOpen = !cartStore.isCartOpen"
+        >
+          <v-badge
+            v-if="cartStore.totalItems > 0"
+            color="error"
+            :content="cartStore.totalItems"
+          >
+            <v-icon>mdi-cart-outline</v-icon>
+          </v-badge>
+          <v-icon v-else>mdi-cart-outline</v-icon>
+        </v-btn>
       </div>
 
       <SearchBar
