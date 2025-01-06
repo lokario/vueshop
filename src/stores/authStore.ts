@@ -43,7 +43,10 @@ export const useAuthStore = defineStore("auth", () => {
     router.push("/signin");
   };
 
-  const saveDataAndRedirect = (data) => {
+  const saveDataAndRedirect = (data: {
+    token: string;
+    user: Partial<User>;
+  }) => {
     // Token and user instantiation
     token.value = data.token;
     rawUser.value = new User(data.user);
