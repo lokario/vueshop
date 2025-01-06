@@ -3,7 +3,7 @@
     <v-text-field
       :v-model="modelValue"
       variant="solo"
-      bg-color="grey-lighten-3"
+      :bg-color="bgColor"
       prepend-inner-icon="mdi-magnify"
       :placeholder="placeholder"
       hide-details="auto"
@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { useDark } from '@vueuse/core';
+
 defineProps({
   modelValue: {
     type: String,
@@ -32,5 +34,10 @@ defineProps({
     type: Function as PropType<() => void>,
     required: true,
   },
+
 });
+
+const isDarkMode = useDark();
+
+const bgColor = computed(() => (isDarkMode.value ? "grey-darken-3" : "grey-lighten-3"));
 </script>

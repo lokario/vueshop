@@ -3,12 +3,12 @@
   <NavDrawer class="position-fixed" />
   <ShoppingCart class="position-fixed" />
 
-  <div
+  <v-sheet
     v-if="productsStore.isLoading"
     class="d-flex flex-wrap justify-center ga-8 pa-8"
   >
     <ProductSkeleton v-for="n in 10" :key="n" />
-  </div>
+  </v-sheet>
 
   <v-alert
     v-else-if="productsStore.apiError"
@@ -24,7 +24,7 @@
     title="We couldn't find any product."
   />
 
-  <div v-else class="d-flex flex-wrap justify-center ga-8 pa-8">
+  <v-sheet v-else class="d-flex flex-wrap justify-center ga-8 pa-8">
     <Product
       v-for="product in productsStore.products"
       :key="product.id"
@@ -38,7 +38,7 @@
 
     <!-- Infinite Scroll Trigger -->
     <div ref="loadTrigger" />
-  </div>
+  </v-sheet>
 </template>
 
 <script setup lang="ts">

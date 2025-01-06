@@ -9,7 +9,7 @@
   >
     <!-- Desktop Layout -->
     <div class="w-100 d-none d-sm-flex align-center">
-      <v-img width="140" src="@/assets/logo-full.png" />
+      <v-img width="140" :src="logo" />
 
       <SearchBar
         class="mx-10"
@@ -79,12 +79,20 @@
 import { useCartStore } from "@/stores/cartStore";
 import { useCategoriesStore } from "@/stores/categoriesStore";
 import { useProductsStore } from "@/stores/productsStore";
+import { useDark } from "@vueuse/core";
 import { useDisplay } from "vuetify";
 
 const productsStore = useProductsStore();
 const categoriesStore = useCategoriesStore();
 const cartStore = useCartStore();
 const display = useDisplay();
+const isDarkMode = useDark();
+
+const logo = computed(() =>
+  isDarkMode.value
+    ? new URL("@/assets/logo-light.png", import.meta.url).href
+    : new URL("@/assets/logo-full.png", import.meta.url).href
+);
 
 const onSearch = async () => {
   categoriesStore.selectedCategory = "";

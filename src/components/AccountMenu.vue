@@ -13,23 +13,48 @@
             <v-avatar color="grey">
               <v-icon icon="mdi-account-circle" />
             </v-avatar>
-            <h3>Juan Diaz</h3>
-            <p class="text-caption mt-1">test@test.com</p>
-            <v-divider class="my-3"></v-divider>
-            <v-btn variant="text" rounded> Edit Account </v-btn>
-            <v-divider class="my-3"></v-divider>
-            <v-btn variant="text" rounded block @click="authStore.logout()"> Sign out </v-btn>
+
+            <h3>{{ authStore.user.name || "Guest" }}</h3>
+            <p class="text-caption mt-1">
+              {{ authStore.user.email || "No email provided" }}
+            </p>
+
+            <v-divider class="my-3" />
+
+            <div class="d-flex text-subtitle-1 align-center">
+              Light
+              <v-switch
+                v-model="isDarkMode"
+                density="compact"
+                size="small"
+                class="mx-5"
+                hide-details
+              />
+              Dark
+            </div>
+
+            <v-divider class="my-3" />
+
+            <v-btn variant="text" rounded block @click="authStore.logout()">
+              Sign out
+            </v-btn>
           </div>
         </v-card-text>
       </v-card>
     </v-menu>
   </div>
 </template>
+
 <script setup>
 import { useAuthStore } from "@/stores/authStore";
+import { useDark } from "@vueuse/core";
 import { ref } from "vue";
 
+const menu = ref(false);
 const authStore = useAuthStore();
 
-const menu = ref(false);
+const isDarkMode = useDark({
+  selector: "html",
+  attribute: "data-theme",
+});
 </script>
