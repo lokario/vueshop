@@ -1,7 +1,7 @@
 <template>
   <v-form @submit.prevent="onSearch" class="w-100">
     <v-text-field
-      :v-model="modelValue"
+      v-model="searchModel"
       variant="solo"
       :bg-color="bgColor"
       prepend-inner-icon="mdi-magnify"
@@ -20,11 +20,9 @@
 <script setup lang="ts">
 import { useDark } from '@vueuse/core';
 
+const searchModel = defineModel()
+
 defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
   placeholder: {
     type: String,
     required: false,

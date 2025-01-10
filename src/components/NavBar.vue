@@ -12,9 +12,9 @@
       <v-img width="140" :src="logo" />
 
       <SearchBar
+        v-model="productsStore.searchQuery"
         class="mx-10"
         :on-search="onSearch"
-        :model-value="productsStore.searchQuery"
         placeholder="Search for products"
       />
 
@@ -69,8 +69,8 @@
       </div>
 
       <SearchBar
+        v-model="productsStore.searchQuery"
         :on-search="onSearch"
-        :model-value="productsStore.searchQuery"
         placeholder="Search for products"
       />
     </div>
