@@ -62,8 +62,8 @@
           />
         </v-sheet>
 
-        <div v-if="emailError || passwordError" class="text-body-2 mt-4 text-red-darken-4">
-          {{ nameError || emailError || passwordError }}
+        <div v-if="emailError || passwordError || authStore.apiError" class="text-body-2 mt-4 text-red-darken-4">
+          {{ nameError || emailError || passwordError || authStore.apiError }}
         </div>
 
         <GradientButton class="my-8" :disabled="!isValid">
