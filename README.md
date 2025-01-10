@@ -58,8 +58,8 @@ src/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/online-store.git
-   cd online-store
+   git clone https://github.com/lokario/vueshop
+   cd vueshop
    ```
 
 2. Install dependencies:
